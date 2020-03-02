@@ -43,6 +43,7 @@ h1 {
   border: 0;
   background-color: transparent;
   cursor: pointer;
+  padding: 0;
 }
 
 .btn:focus {
@@ -59,6 +60,10 @@ h1 {
 
 .controls .fa-pause {
   color: #fff;
+}
+
+.controls .progress {
+  margin-left: 10px;
 }
 
 .controls .timestamp {
