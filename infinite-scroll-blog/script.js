@@ -46,6 +46,18 @@ async function showLoading() {
   loader.classList.remove('show');
 }
 
+// Filter posts by input
+function filterPosts(e) {
+  const term = e.target.value.toUpperCase();
+  const posts = document.querySelectorAll('.post').forEach(post => {
+    const title = post.querySelector('.post-title').innerText.toUpperCase();
+    const body = post.querySelector('.post-body').innerText.toUpperCase();
+
+    const matches = title.indexOf(term) >= 0 || body.indexOf(term) >= 0;
+    post.style.display = matches ? 'flex' : 'none';
+  });
+}
+
 // Show initial posts
 showPosts();
 
@@ -57,3 +69,5 @@ window.addEventListener('scroll', () => {
     showLoading();
   }
 });
+
+filter.addEventListener('input', filterPosts);
