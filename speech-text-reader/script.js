@@ -100,6 +100,8 @@ function getVoices() {
 
     voicesSelect.appendChild(option);
   });
+
+  message.voice = voices[0];
 }
 
 // Set text
@@ -112,6 +114,11 @@ function speakText() {
   speechSynthesis.speak(message);
 }
 
+// Set voice
+function setVoice(e) {
+  message.voice = voices.find(voice => voice.name === e.target.value);
+}
+
 // Voices changed
 speechSynthesis.addEventListener('voiceschanged', getVoices);
 
@@ -120,5 +127,14 @@ toggleBtn.addEventListener('click', () => textBox.classList.toggle('show'));
 
 // Close button
 closeBtn.addEventListener('click', () => textBox.classList.remove('show'));
+
+// Change voice
+voicesSelect.addEventListener('change', setVoice);
+
+// Read text button
+readBtn.addEventListener('click', () => {
+  setTextMessage(textarea.value);
+  speakText();
+});
 
 getVoices();
