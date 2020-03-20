@@ -1,6 +1,7 @@
 const main = document.querySelector('main');
 const voicesSelect = document.getElementById('voices');
 const textarea = document.getElementById('text');
+const textBox = document.getElementById('text-box');
 const readBtn = document.getElementById('read');
 const toggleBtn = document.getElementById('toggle');
 const closeBtn = document.getElementById('close');
@@ -74,3 +75,30 @@ function createBox(item) {
 
   main.appendChild(box);
 }
+
+// Store voices
+let voices = [];
+
+function getVoices() {
+  voices = speechSynthesis.getVoices();
+
+  voices.forEach(voice => {
+    const option = document.createElement('option');
+
+    option.value = voice.name;
+    option.innerText = `${voice.name} ${voice.lang}`;
+
+    voicesSelect.appendChild(option);
+  });
+}
+
+// Voices changed
+speechSynthesis.addEventListener('voiceschanged', getVoices);
+
+// Toggle text box
+toggleBtn.addEventListener('click', () => textBox.classList.toggle('show'));
+
+// Close button
+closeBtn.addEventListener('click', () => textBox.classList.remove('show'));
+
+getVoices();
